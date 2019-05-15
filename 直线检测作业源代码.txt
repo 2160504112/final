@@ -1,0 +1,178 @@
+直线检测作业源代码
+1.
+I = imread('test3.jpg','jpg');
+
+%五种边缘检测
+figure('Name','进行五种边缘检测');
+subplot(4,1,1);
+imshow(I);
+title('原图');
+BW1=edge(I,'Roberts',0.16);
+subplot(4,5,6);
+imshow(BW1);
+title('Robert算子边缘检测');
+ 
+BW2=edge(I,'Sobel',0.16);
+subplot(4,5,7);
+imshow(BW2);
+title('Sobel算子边缘检测')
+ 
+BW3=edge(I,'Prewitt',0.06);
+subplot(4,5,8);
+imshow(BW3);
+title('Prewitt算子边缘检测');
+ 
+BW4=edge(I,'LOG',0.012);
+subplot(4,5,9);
+imshow(BW4);
+title('LOG算子边缘检测')
+ 
+BW5=edge(I,'Canny',0.35);
+subplot(4,5,10);
+imshow(BW5);title('Canny算子边缘检测')
+
+[H,T,R]=hough(BW1);
+subplot(4,5,11);
+imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');%hough变换的图像
+xlabel('\theta'), ylabel('\rho');
+axis on,axis square,hold on;
+P  = houghpeaks(H,5);%提取5个极值点
+x = T(P(:,2));
+y = R(P(:,1));
+plot(x,y,'s','color','white');%标出极值点
+lines=houghlines(BW1,T,R,P);%提取线段
+subplot(4,5,16);
+imshow(I), hold on;
+for k = 1:length(lines)
+    xy = [lines(k).point1; lines(k).point2]; 
+    plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+    plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');%起点
+    plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');%终点
+end
+
+[H,T,R]=hough(BW2);
+subplot(4,5,12);
+imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');%hough变换的图像
+xlabel('\theta'), ylabel('\rho');
+axis on,axis square,hold on;
+P  = houghpeaks(H,5);%提取5个极值点
+x = T(P(:,2));
+y = R(P(:,1));
+plot(x,y,'s','color','white');%标出极值点
+lines=houghlines(BW2,T,R,P);%提取线段
+subplot(4,5,17);
+imshow(I), hold on;
+for k = 1:length(lines)
+    xy = [lines(k).point1; lines(k).point2]; 
+    plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+    plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');%起点
+    plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');%终点
+end
+
+[H,T,R]=hough(BW3);
+subplot(4,5,13);
+imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');%hough变换的图像
+xlabel('\theta'), ylabel('\rho');
+axis on,axis square,hold on;
+P  = houghpeaks(H,5);%提取5个极值点
+x = T(P(:,2));
+y = R(P(:,1));
+plot(x,y,'s','color','white');%标出极值点
+lines=houghlines(BW3,T,R,P);%提取线段
+subplot(4,5,18);
+imshow(I), hold on;
+for k = 1:length(lines)
+    xy = [lines(k).point1; lines(k).point2]; 
+    plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+    plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');%起点
+    plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');%终点
+end
+
+[H,T,R]=hough(BW4);
+subplot(4,5,14);
+imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');%hough变换的图像
+xlabel('\theta'), ylabel('\rho');
+axis on,axis square,hold on;
+P  = houghpeaks(H,5);%提取5个极值点
+x = T(P(:,2));
+y = R(P(:,1));
+plot(x,y,'s','color','white');%标出极值点
+lines=houghlines(BW4,T,R,P);%提取线段
+subplot(4,5,19);
+imshow(I), hold on;
+for k = 1:length(lines)
+    xy = [lines(k).point1; lines(k).point2]; 
+    plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+    plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');%起点
+    plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');%终点
+end
+
+[H,T,R]=hough(BW5);
+subplot(4,5,15);
+imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');%hough变换的图像
+xlabel('\theta'), ylabel('\rho');
+axis on,axis square,hold on;
+P  = houghpeaks(H,5);%提取5个极值点
+x = T(P(:,2));
+y = R(P(:,1));
+plot(x,y,'s','color','white');%标出极值点
+lines=houghlines(BW5,T,R,P);%提取线段
+subplot(4,5,20);
+imshow(I), hold on;
+for k = 1:length(lines)
+    xy = [lines(k).point1; lines(k).point2]; 
+    plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+    plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');%起点
+    plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');%终点
+end
+
+2.
+I = imread('test5.png','png');
+
+%边缘检测
+subplot(3,1,1);
+imshow(I);
+title('原图');
+ 
+BW1=edge(I,'Prewitt',0.06);
+subplot(3,4,5);
+imshow(BW1);
+title('Prewitt算子边缘检测');
+  
+BW2=edge(I,'Canny',0.35);
+subplot(3,4,9);
+imshow(BW2);title('Canny算子边缘检测')
+
+for i=1:3
+    t=2*i+1;
+    [H,T,R]=hough(BW1);
+    P  = houghpeaks(H,t);%提取极值点
+    x = T(P(:,2));
+    y = R(P(:,1));
+    lines=houghlines(BW1,T,R,P);%提取线段
+    subplot(3,4,i+5);
+    imshow(I), hold on;
+    for k = 1:length(lines)
+        xy = [lines(k).point1; lines(k).point2]; 
+        plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+        plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');%起点
+        plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');%终点
+    end
+end
+
+for i=1:3
+    t=2*i+1;
+    [H,T,R]=hough(BW2);
+    P  = houghpeaks(H,t);%提取极值点
+    x = T(P(:,2));
+    y = R(P(:,1));
+    lines=houghlines(BW2,T,R,P);%提取线段
+    subplot(3,4,i+9);
+    imshow(I), hold on;
+    for k = 1:length(lines)
+        xy = [lines(k).point1; lines(k).point2]; 
+        plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');%画出线段
+        plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');%起点
+        plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');%终点
+    end
+end
